@@ -42,7 +42,7 @@ app.use(function(err, req, res, next) {
 
 
 // Set port
-const port = process.env.PORT || 4000;
+const port = process.env.APP_PORT || 4000;
 
 // Start server
 app.listen(port, () => {
@@ -50,4 +50,6 @@ app.listen(port, () => {
 });
 
 
+
+let name = "aya";
 module.exports = app;
