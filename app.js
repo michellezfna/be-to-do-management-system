@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 //import module & declare variable
 var createError = require('http-errors');
 var express = require('express');
@@ -7,6 +9,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var taskRouter = require('./routes/task');
+var usertaskRouter = require('./routes/usertask');
 
 // create express app
 var app = express();
@@ -22,12 +26,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+
+//users API
 app.use('/users', usersRouter);
+
+//task API
+app.use('/task', taskRouter);
+
+//usertask API
+app.use('/usertask', usertaskRouter);
 
 // catch 404 and forward to error handler
 app.use(function (next) {
   next(createError(404));
 });
+
+//task api
+
+//userstask api
+
+//users api
 
 // error handler
 app.use(function (err, req, res) {
