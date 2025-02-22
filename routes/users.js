@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 // const { stringify } = require('jade/lib/utils');
 
 //Gett All Users
-router.get('/get-all', async function (req, res) {
+router.get('/', async function (req, res) {
   try {
     const users = await prisma.user.findMany();
     if (users.length === 0 || users === null || users === undefined) {
@@ -20,7 +20,7 @@ router.get('/get-all', async function (req, res) {
 });
 
 //Get User By ID
-router.get('/get-user/:id', async function (req, res) {
+router.get('/:id', async function (req, res) {
   try {
     const { id } = req.params;
     const user = await prisma.user.findUnique({
@@ -41,7 +41,7 @@ router.get('/get-user/:id', async function (req, res) {
 });
 
 // Create User
-router.post('/create', async function (req, res) {
+router.post('/', async function (req, res) {
   const { username, email, password } = req.body;
   username === ''
     ? res.json('Please the username field')
@@ -63,7 +63,7 @@ router.post('/create', async function (req, res) {
 });
 
 // Update User
-router.put('/update/:id', async function (req, res) {
+router.put('/:id', async function (req, res) {
   const { id } = req.params;
   const { name, email, password } = req.body;
   name === ''
@@ -89,7 +89,7 @@ router.put('/update/:id', async function (req, res) {
 });
 
 // Delete User
-router.delete('/delete/:id', async function (req, res) {
+router.delete('/:id', async function (req, res) {
   const { id } = req.params;
   const userExist = await prisma.user.delete({
     where: {

@@ -4,7 +4,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 // Get All Tasks
-router.get('/get-all', async function (req, res) {
+router.get('/', async function (req, res) {
   const tasks = await prisma.task.findMany();
   res.send(tasks);
 });
@@ -21,7 +21,7 @@ router.get('/get-task/:id', async function (req, res) {
 });
 
 // Create Task
-router.post('/create', async function (req, res) {
+router.post('/', async function (req, res) {
   const { title, desc, priority, is_done, created_by } = req.body;
   if (is_done === undefined || is_done === null) {
     const task = await prisma.task.create({
@@ -51,7 +51,7 @@ router.post('/create', async function (req, res) {
 });
 
 // Update Task
-router.put('/update/:id', async function (req, res) {
+router.put('/:id', async function (req, res) {
   const { id } = req.params;
   const { title, desc, priority, is_done, created_by } = req.body;
   if (is_done === undefined || is_done === null) {
@@ -88,7 +88,7 @@ router.put('/update/:id', async function (req, res) {
 });
 
 // Delete Task
-router.delete('/delete/:id', async function (req, res) {
+router.delete('/:id', async function (req, res) {
   const { id } = req.params;
   const task = await prisma.task.delete({
     where: {
